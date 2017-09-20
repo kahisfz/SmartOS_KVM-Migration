@@ -20,14 +20,14 @@ source_Server#vmadm stop UUID
 [source_Server ~]# zfs snapshot zones/cores/UUID@tosend
 
 6. Send the snapshot to the destination server, it may take a lot of time depending upon the size of kvm, for example
-[source_Server ~]# zfs send zones/UUID@tosend | ssh gz2.domain zfs receive -v zones/UUID
+[source_Server ~]# zfs send zones/UUID@tosend | ssh destination.server zfs receive -v zones/UUID
 [source_Server ~]# zfs send zones/UUID-disk0@tosend | ssh destination.server zfs receive -v zones/UUID-disk0
 [source_Server ~]# zfs send zones/UUID-disk1@tosend | ssh destination.server zfs receive -v zones/UUID-disk1
 [source_Server ~]# zfs send zones/cores/UUID@tosend | ssh destination.server zfs receive -v zones/cores/UUID
 7. Copy the line of VM from inside the /etc/zones/index in the source global zone, and paste it at the end of same file in the destination global zone.
 [Source_Server ~]# cat /etc/zones/index | grep UUID
 [Destination_Server ~]# echo "UUID:installed:/zones/UUID" >> /etc/zones/index
-(PS.or you may simply nano editor)
+(PS.or you may use nano editor)
 
 8.Copy the xml configuration file from the source global zone, to the destination 
 [source_Server ~]#scp /etc/zones/UUID.xml destination.server:/etc/zones/UUID.xml
