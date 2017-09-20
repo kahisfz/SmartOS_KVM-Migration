@@ -26,6 +26,7 @@ source_Server#vmadm stop UUID
 [source_Server ~]# zfs send zones/cores/UUID@tosend | ssh destination.server zfs receive -v zones/cores/UUID
 7. Copy the line of VM from inside the /etc/zones/index in the source global zone, and paste it at the end of same file in the destination global zone.
 [Source_Server ~]# cat /etc/zones/index | grep UUID
+
 [Destination_Server ~]# echo "UUID:installed:/zones/UUID" >> /etc/zones/index
 (PS.or you may use nano editor)
 
